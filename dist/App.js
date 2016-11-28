@@ -20321,7 +20321,7 @@ module.exports=require(152)
 module.exports = require('./lib/React');
 
 },{"./lib/React":155}],183:[function(require,module,exports){
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
@@ -20330,7 +20330,7 @@ exports.LivePreview = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -20350,20 +20350,38 @@ var LivePreview = exports.LivePreview = function (_Component) {
 
 		var _this = _possibleConstructorReturn(this, (LivePreview.__proto__ || Object.getPrototypeOf(LivePreview)).call(this, props, context));
 
-		_this.state = {};
+		_this.state = {
+			html: ''
+		};
+		_this.converter = new showdown.Converter();
 		return _this;
 	}
 
 	_createClass(LivePreview, [{
-		key: "componentWillUnmount",
+		key: 'componentWillUnmount',
 		value: function componentWillUnmount() {}
 	}, {
-		key: "componentDidMount",
+		key: 'componentDidMount',
 		value: function componentDidMount() {}
 	}, {
-		key: "render",
+		key: 'componentDidUpdate',
+		value: function componentDidUpdate(prevProps, prevState) {
+			document.getElementById('LivePreview').innerHTML = this.state.html;
+		}
+	}, {
+		key: 'componentWillReceiveProps',
+		value: function componentWillReceiveProps(props) {
+			//console.log(props.text);如果使用this.props.text，會取用到上一個componentlifecycle 
+			//nextProps
+			var html = this.converter.makeHtml(props.text);
+			this.setState({
+				html: html
+			});
+		}
+	}, {
+		key: 'render',
 		value: function render() {
-			return _react2.default.createElement("div", null, this.props.text);
+			return _react2.default.createElement("div", { id: "LivePreview" });
 		}
 	}]);
 
