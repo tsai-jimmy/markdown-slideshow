@@ -1,7 +1,7 @@
 {
-  "name": "react-babel-starter",
+  "name": "react-markdown-slideshow",
   "version": "0.0.1",
-  "description": "React.js starter kit with Babel and Gulpfile.",
+  "description": "React.js Use showdown & remark libary with bower install ",
   "main": "server.js",
   "dependencies": {
     "body-parser": "^1.4.3",
@@ -30,10 +30,10 @@
   "keywords": [
     "react",
     "babel",
-    "es2015",
-    "tutorial"
+    "es2016",
+    "react-markdown-slideshow"
   ],
-  "author": "jollen",
+  "author": "jimmy",
   "engines": {
     "node": "0.12.x"
   }

@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
@@ -7,7 +7,7 @@ exports.SlideShowButton = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -33,18 +33,23 @@ var SlideShowButton = exports.SlideShowButton = function (_Component) {
 	}
 
 	_createClass(SlideShowButton, [{
-		key: "componentWillUnmount",
+		key: 'componentWillUnmount',
 		value: function componentWillUnmount() {}
 	}, {
-		key: "componentDidMount",
+		key: 'componentDidMount',
 		value: function componentDidMount() {}
 	}, {
-		key: "_handleClick",
+		key: '_handleClick',
 		value: function _handleClick(e) {
-			this.setState({});
+			//catch 文字輸入區域的內容放到自己component的狀態
+			this.setState({ text: this.props.text });
+			//根據github wiki，將markdown的本文放到ID為source的區塊
+			document.getElementById('source').innerHTML = this.props.text;
+			//remark function
+			remark.create();
 		}
 	}, {
-		key: "render",
+		key: 'render',
 		value: function render() {
 			return _react2.default.createElement("button", { className: this.props.className, onClick: this._handleClick }, "播放");
 		}

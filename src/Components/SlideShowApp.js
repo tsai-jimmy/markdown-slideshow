@@ -49,10 +49,12 @@ var SlideShowApp = exports.SlideShowApp = function (_Component) {
 		value: function handlechange(e) {
 			this.setState({ text: e.target.value });
 		}
+		//將markdown的文字訊息利用props傳給Slideshowbuttn-->
+
 	}, {
 		key: 'render',
 		value: function render() {
-			return _react2.default.createElement("div", { className: "row" }, _react2.default.createElement("div", { className: "col-md-6" }, _react2.default.createElement(_SlideShowButton.SlideShowButton, { className: "btn btn-primary" }), _react2.default.createElement("textarea", { className: "form-control", rows: "10", onChange: this.handlechange })), _react2.default.createElement("div", { className: "col-md-6" }, _react2.default.createElement(_LivePreview.LivePreview, { text: this.state.text })));
+			return _react2.default.createElement("div", { className: "row" }, _react2.default.createElement("div", { className: "col-md-6" }, _react2.default.createElement(_SlideShowButton.SlideShowButton, { text: this.state.text, className: "btn btn-primary" }), _react2.default.createElement("textarea", { className: "form-control", rows: "10", onChange: this.handlechange })), _react2.default.createElement("div", { className: "col-md-6" }, _react2.default.createElement(_LivePreview.LivePreview, { text: this.state.text })));
 		}
 	}]);
 

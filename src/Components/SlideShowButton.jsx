@@ -14,7 +14,12 @@ export class SlideShowButton extends Component {
 	componentDidMount() {
 	}
 	_handleClick(e) {
-		this.setState({})
+		//catch 文字輸入區域的內容放到自己component的狀態
+		this.setState({text: this.props.text});
+		//根據github wiki，將markdown的本文放到ID為source的區塊
+		document.getElementById('source').innerHTML = this.props.text;
+		//remark function
+		remark.create();
 	}
 
 	render() {
