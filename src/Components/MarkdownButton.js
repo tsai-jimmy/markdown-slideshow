@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.SlideShowButton = undefined;
+exports.MarkdownButton = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -19,67 +19,39 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var SlideShowButton = exports.SlideShowButton = function (_Component) {
-	_inherits(SlideShowButton, _Component);
+var MarkdownButton = exports.MarkdownButton = function (_Component) {
+	_inherits(MarkdownButton, _Component);
 
-	function SlideShowButton(props, context) {
-		_classCallCheck(this, SlideShowButton);
+	function MarkdownButton(props, context) {
+		_classCallCheck(this, MarkdownButton);
 
-		var _this = _possibleConstructorReturn(this, (SlideShowButton.__proto__ || Object.getPrototypeOf(SlideShowButton)).call(this, props, context));
+		var _this = _possibleConstructorReturn(this, (MarkdownButton.__proto__ || Object.getPrototypeOf(MarkdownButton)).call(this, props, context));
 
 		_this.state = {};
-		_this._handleClick = _this._handleClick.bind(_this);
+		_this.handleClick = _this.handleClick.bind(_this);
 		return _this;
 	}
 
-	_createClass(SlideShowButton, [{
+	_createClass(MarkdownButton, [{
 		key: 'componentWillUnmount',
 		value: function componentWillUnmount() {}
 	}, {
 		key: 'componentDidMount',
-		value: function componentDidMount() {
-			$(this.refs.playback).addClass('disabled');
-		}
+		value: function componentDidMount() {}
 	}, {
-		key: 'componentDidUpdate',
-		value: function componentDidUpdate(prevProps, prevState) {
-			if (this.props.canPlay === true) {
-				$(this.refs.playback).removeClass('disabled');
-			} else {
-				$(this.refs.playback).addClass('disabled');
-			}
-		}
-	}, {
-		key: '_handleClick',
-		value: function _handleClick(e) {
-			//catch 文字輸入區域的內容放到自己component的狀態
-			this.setState({ text: this.props.text });
-			//根據github wiki，將markdown的本文放到ID為source的區塊
-			document.getElementById('source').innerHTML = this.props.text;
-			//remark function
-			remark.create();
+		key: 'handleClick',
+		value: function handleClick() {
+			window.open('http://markdown.tw/', '_blank');
 		}
 	}, {
 		key: 'render',
 		value: function render() {
-			return _react2.default.createElement("label", {
-				ref: "playback",
-				className: this.props.className,
-				onClick: this._handleClick
-			}, _react2.default.createElement("input", {
-				type: "radio" }), _react2.default.createElement("i", { className: "glyphicon glyphicon-facetime-video" }));
+			return _react2.default.createElement("span", null, _react2.default.createElement("label", { className: "btn btn-default btn-circle btn-lg", onClick: this.handleClick, target: "_blank" }, _react2.default.createElement("i", { className: "glyphicon glyphicon-pencil" })));
 		}
 	}]);
 
-	return SlideShowButton;
+	return MarkdownButton;
 }(_react.Component);
 
-SlideShowButton.defaultProps = {
-	canPlay: true,
-	text: ''
-};
-SlideShowButton.propTypes = {
-	canplay: _react2.default.PropTypes.bool,
-	text: _react2.default.PropTypes.string
-};
-//# sourceMappingURL=SlideShowButton.js.map
+MarkdownButton.defaultProps = {};
+//# sourceMappingURL=MarkdownButton.js.map
