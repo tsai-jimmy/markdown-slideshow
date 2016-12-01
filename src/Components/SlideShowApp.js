@@ -15,6 +15,8 @@ var _LivePreview = require('./LivePreview');
 
 var _SlideShowButton = require('./SlideShowButton');
 
+var _MarkdownButton = require('./MarkdownButton');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -47,14 +49,24 @@ var SlideShowApp = exports.SlideShowApp = function (_Component) {
 	}, {
 		key: 'handlechange',
 		value: function handlechange(e) {
-			this.setState({ text: e.target.value });
+			this.setState({
+				text: e.target.value,
+				canPlay: e.target.value !== ''
+			});
 		}
 		//將markdown的文字訊息利用props傳給Slideshowbuttn-->
 
 	}, {
 		key: 'render',
 		value: function render() {
-			return _react2.default.createElement("div", { className: "row" }, _react2.default.createElement("div", { className: "col-md-6" }, _react2.default.createElement(_SlideShowButton.SlideShowButton, { text: this.state.text, className: "btn btn-primary" }), _react2.default.createElement("textarea", { className: "form-control", rows: "10", onChange: this.handlechange })), _react2.default.createElement("div", { className: "col-md-6" }, _react2.default.createElement(_LivePreview.LivePreview, { text: this.state.text })));
+			return _react2.default.createElement("div", { className: "row" }, _react2.default.createElement("div", { className: "col-md-6" }, _react2.default.createElement("h1", null, "You can write something at here"), _react2.default.createElement(_MarkdownButton.MarkdownButton, null), _react2.default.createElement("textarea", {
+				className: "form-control",
+				onChange: this.handlechange,
+				rows: "30" })), _react2.default.createElement("div", { className: "col-md-6" }, _react2.default.createElement("h1", null, "Here will show something you write"), _react2.default.createElement("span", { "data-toggle": "buttons" }, _react2.default.createElement(_SlideShowButton.SlideShowButton, {
+				className: "btn btn-default btn-circle btn-lg",
+				canPlay: this.state.canPlay,
+				text: this.state.text })), _react2.default.createElement(_LivePreview.LivePreview, {
+				text: this.state.text })));
 		}
 	}]);
 

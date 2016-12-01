@@ -20397,6 +20397,65 @@ LivePreview.defaultProps = {};
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
+exports.MarkdownButton = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var MarkdownButton = exports.MarkdownButton = function (_Component) {
+	_inherits(MarkdownButton, _Component);
+
+	function MarkdownButton(props, context) {
+		_classCallCheck(this, MarkdownButton);
+
+		var _this = _possibleConstructorReturn(this, (MarkdownButton.__proto__ || Object.getPrototypeOf(MarkdownButton)).call(this, props, context));
+
+		_this.state = {};
+		_this.handleClick = _this.handleClick.bind(_this);
+		return _this;
+	}
+
+	_createClass(MarkdownButton, [{
+		key: 'componentWillUnmount',
+		value: function componentWillUnmount() {}
+	}, {
+		key: 'componentDidMount',
+		value: function componentDidMount() {}
+	}, {
+		key: 'handleClick',
+		value: function handleClick() {
+			window.open('http://markdown.tw/', '_blank');
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			return _react2.default.createElement("span", null, _react2.default.createElement("label", { className: "btn btn-default btn-circle btn-lg", onClick: this.handleClick, target: "_blank" }, _react2.default.createElement("i", { className: "glyphicon glyphicon-pencil" })));
+		}
+	}]);
+
+	return MarkdownButton;
+}(_react.Component);
+
+MarkdownButton.defaultProps = {};
+//# sourceMappingURL=MarkdownButton.js.map
+
+},{"react":182}],185:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
 exports.SlideShowApp = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -20408,6 +20467,8 @@ var _react2 = _interopRequireDefault(_react);
 var _LivePreview = require('./LivePreview');
 
 var _SlideShowButton = require('./SlideShowButton');
+
+var _MarkdownButton = require('./MarkdownButton');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20441,14 +20502,24 @@ var SlideShowApp = exports.SlideShowApp = function (_Component) {
 	}, {
 		key: 'handlechange',
 		value: function handlechange(e) {
-			this.setState({ text: e.target.value });
+			this.setState({
+				text: e.target.value,
+				canPlay: e.target.value !== ''
+			});
 		}
 		//將markdown的文字訊息利用props傳給Slideshowbuttn-->
 
 	}, {
 		key: 'render',
 		value: function render() {
-			return _react2.default.createElement("div", { className: "row" }, _react2.default.createElement("div", { className: "col-md-6" }, _react2.default.createElement(_SlideShowButton.SlideShowButton, { text: this.state.text, className: "btn btn-primary" }), _react2.default.createElement("textarea", { className: "form-control", rows: "10", onChange: this.handlechange })), _react2.default.createElement("div", { className: "col-md-6" }, _react2.default.createElement(_LivePreview.LivePreview, { text: this.state.text })));
+			return _react2.default.createElement("div", { className: "row" }, _react2.default.createElement("div", { className: "col-md-6" }, _react2.default.createElement("h1", null, "You can write something at here"), _react2.default.createElement(_MarkdownButton.MarkdownButton, null), _react2.default.createElement("textarea", {
+				className: "form-control",
+				onChange: this.handlechange,
+				rows: "30" })), _react2.default.createElement("div", { className: "col-md-6" }, _react2.default.createElement("h1", null, "Here will show something you write"), _react2.default.createElement("span", { "data-toggle": "buttons" }, _react2.default.createElement(_SlideShowButton.SlideShowButton, {
+				className: "btn btn-default btn-circle btn-lg",
+				canPlay: this.state.canPlay,
+				text: this.state.text })), _react2.default.createElement(_LivePreview.LivePreview, {
+				text: this.state.text })));
 		}
 	}]);
 
@@ -20458,7 +20529,7 @@ var SlideShowApp = exports.SlideShowApp = function (_Component) {
 SlideShowApp.defaultProps = {};
 //# sourceMappingURL=SlideShowApp.js.map
 
-},{"./LivePreview":183,"./SlideShowButton":185,"react":182}],185:[function(require,module,exports){
+},{"./LivePreview":183,"./MarkdownButton":184,"./SlideShowButton":186,"react":182}],186:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -20498,7 +20569,18 @@ var SlideShowButton = exports.SlideShowButton = function (_Component) {
 		value: function componentWillUnmount() {}
 	}, {
 		key: 'componentDidMount',
-		value: function componentDidMount() {}
+		value: function componentDidMount() {
+			$(this.refs.playback).addClass('disabled');
+		}
+	}, {
+		key: 'componentDidUpdate',
+		value: function componentDidUpdate(prevProps, prevState) {
+			if (this.props.canPlay === true) {
+				$(this.refs.playback).removeClass('disabled');
+			} else {
+				$(this.refs.playback).addClass('disabled');
+			}
+		}
 	}, {
 		key: '_handleClick',
 		value: function _handleClick(e) {
@@ -20512,17 +20594,29 @@ var SlideShowButton = exports.SlideShowButton = function (_Component) {
 	}, {
 		key: 'render',
 		value: function render() {
-			return _react2.default.createElement("button", { className: this.props.className, onClick: this._handleClick }, "播放");
+			return _react2.default.createElement("label", {
+				ref: "playback",
+				className: this.props.className,
+				onClick: this._handleClick
+			}, _react2.default.createElement("input", {
+				type: "radio" }), _react2.default.createElement("i", { className: "glyphicon glyphicon-facetime-video" }));
 		}
 	}]);
 
 	return SlideShowButton;
 }(_react.Component);
 
-SlideShowButton.defaultProps = {};
+SlideShowButton.defaultProps = {
+	canPlay: true,
+	text: ''
+};
+SlideShowButton.propTypes = {
+	canplay: _react2.default.PropTypes.bool,
+	text: _react2.default.PropTypes.string
+};
 //# sourceMappingURL=SlideShowButton.js.map
 
-},{"react":182}],186:[function(require,module,exports){
+},{"react":182}],187:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -20538,4 +20632,4 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 (0, _reactDom.render)(_react2.default.createElement(_SlideShowApp.SlideShowApp, null), document.getElementById('content'));
 //# sourceMappingURL=App.js.map
 
-},{"./Components/SlideShowApp":184,"react":182,"react-dom":2}]},{},[186])
+},{"./Components/SlideShowApp":185,"react":182,"react-dom":2}]},{},[187])

@@ -12,6 +12,15 @@ export class SlideShowButton extends Component {
 	}
 
 	componentDidMount() {
+		$(this.refs.playback).addClass('disabled');
+	}
+	componentDidUpdate(prevProps, prevState) {
+		if(this.props.canPlay === true) {
+			$(this.refs.playback).removeClass('disabled');
+		}
+		else{
+			$(this.refs.playback).addClass('disabled');
+		}
 	}
 	_handleClick(e) {
 		//catch 文字輸入區域的內容放到自己component的狀態
@@ -24,11 +33,25 @@ export class SlideShowButton extends Component {
 
 	render() {
 		return (
-			<button className={this.props.className} onClick={this._handleClick}>播放</button>
+		        <label
+		        	ref="playback"
+		        	className={this.props.className}
+		        	onClick={this._handleClick}
+		        >
+		        	<input 
+		        		type="radio"
+		        	/>
+		        	<i className="glyphicon glyphicon-facetime-video"></i>
+		        </label>
 		);
 	}
 }
 
 SlideShowButton.defaultProps = {
-	
+	canPlay: true,
+	text: ''	
+}
+SlideShowButton.propTypes = {
+	canplay: React.PropTypes.bool,
+	text: React.PropTypes.string
 }
